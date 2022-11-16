@@ -1,17 +1,26 @@
 body {
-    background: linear-gradient(90deg, #6652C3,#5AE6E0);
+    background: linear-gradient(90deg, #6652C3, #5AE6E0);
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+
 }
 
-#titulo{
-    font-family: 'Pokemon Solid', sans-serif;
+#titulo {
+    font-family: 'Pokemon Solid', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 10vw;
     color: #6652C3;
     text-shadow: 0 0 15px #6652C3, 0 0 30px #6652C3, 0 0 30px #6652C3, 0 0 30px #6652C3;
-    -webkit-text-stroke: 2px aqua; 
-}  
+    -webkit-text-stroke: 2px #5AE6E0;
+}
 
-#pk{
+#pk {
+    align-content: center;
     text-align: center;
+    /* margin-top: 100px;
+    margin-bottom: 100px;
+    height: 200px; */
+
 }
 
 .contenedor {
@@ -21,17 +30,18 @@ body {
     grid-gap: 20px;
 }
 
-.card{
-    position: relative;
-    background-color: #FECC51;
-    border-color:#130F26;
-    border-style:solid;
-    border-radius:6px;
+.card {
+    /* position: relative; */
+    /* background-color: #FECC51; */
+    background-color: lightblue;
+    border-color: #130F26;
+    border-style: solid;
+    border-radius: 6px;
     padding: 10%;
     max-width: 100%;
     max-height: 1000%;
     text-align: center;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;    
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .name {
@@ -49,7 +59,7 @@ body {
 }
 
 .card:hover {
-    background-color: #F4AF01; 
+    background-color: gold;
     box-shadow: #5AE6E0;
     color: black;
     font-weight: bold;
@@ -58,25 +68,161 @@ body {
     transition: 0s;
     filter: grayscale (0%);
     opacity: 1;
-    /* transform: perspective(500px) rotateY(180deg); */
 }
 
-/* .card .front {
-    position: absolute;
-    transform: perspective(600px) rotateY(0deg);
-    backface-visibility: hidden;
-} 
-
-.card .back {
-    position:inherit;
-    transform: perspective(600px) rotateY(180deg);
-    backface-visibility: hidden;
+/* Menú desplegable */
+.encabezado {
+    display: flex;
+    margin: 0px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    width: 150%;
+    background-color: #130F26;
+}
+.nav{
+    display:flex;
 }
 
-.card:hover .front{
-    transform: perspective(500px) rotateY(180deg);
+.submenu1{
+    border-style: none;
+    background-color: none;
+
 }
 
-.card:hover .back{
-    transform: perspective(500px) rotateY(360deg);
+ul,
+ol {
+    list-style: none;
+}
+
+.nav li button {
+    background: none;
+    color: #fff;
+    padding: 10px 25px;
+    text-transform: uppercase;
+    width: auto;
+    display: block;
+
+
+}
+
+.nav li button:hover {
+    background-color: #6652C3;
+}
+
+/* .nav button{
+    float:left;
+
 } */
+
+
+.nav li ul {
+    display: none;
+    position: absolute;
+    background-color: #130F26;
+    max-width: auto;
+}
+
+.nav li:hover>ul {
+    display: block;
+    /* Buscador------- */
+}
+
+.buscador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    transform: translate(-50%, -50%);
+    background: #f5f5f5;
+    padding: 6px;
+    height: 40px;
+    border-radius: 40px;
+}
+
+.inputBuscar {
+    background: none;
+    border: none;
+    outline: none;
+    color: #f1f1f1;
+    float: right;
+    line-height: 60px;
+    transition: 0.3s;
+    width: 0;
+
+}
+
+.botonBuscador {
+
+    width: 40px;
+    height: 40px;
+    text-decoration: none;
+    color: gray;
+    font-size: 30px;
+}
+
+/* Para que sea responsivo el buscador */
+@media screen and (min-width:480px) {
+    .buscador:hover>.inputBuscar {
+        width: 190px;
+
+    }
+
+    @media screen and (min-width:768px) {
+        .buscador:hover>.inputBuscar {
+            width: 300px;
+
+        }
+
+        @media screen and (min-width:1024px) {
+            .buscador:hover>.inputBuscar {
+                width: 500px;
+
+            }
+        }
+
+        /* Para el modal  */
+        .modal-container {
+            box-sizing: content-box;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            opacity: 0;
+            pointer-events: none;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100%;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-container.show {
+            pointer-events: auto;
+            opacity: 1;
+
+        }
+
+        .modal {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            padding: 30px 50px;
+            width: 600px;
+            max-width: 100%;
+        }
+
+        .close {
+            position:relative;
+            top: -290px;
+            left: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .open {
+            cursor: pointer;
+        }
