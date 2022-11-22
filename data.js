@@ -1,9 +1,12 @@
-export const filtraTipos = (type,arrPokemon) => {  
-    const filterType= arrPokemon.filter((element) => 
+export const filtraTipos = (type, arrPokemon) => {  
+    const filterType = arrPokemon.filter((element) => 
         element.type.includes(type)
     )
+
+    // console.log(filterType)
     return filterType;   
 };
+
 
 export const ordenarAZ = (arrPokemon) => {
     return arrPokemon.sort((a, b) => {
@@ -23,35 +26,22 @@ export const ordenarZA = (arrPokemon) => {
 });
 };
 
-export const contarTipos = (arrPokemon) =>{
-    const pruebita= arrPokemon.map((type) => arrPokemon.type);
-console.log(pruebita)
-};
-// export const filtraBuscador = (name) => {
-//     // console.log(name)
-//     const buscador= arrPokemon.filter((name) => {
-//         name.target.matches("")
-//     });
-//     // console.log(buscador)
-//     return buscador
-// }
+export const filtraBuscador = (name, arrPokemon) => {
+    const buscador = arrPokemon.filter(pokemon => pokemon.name.includes(name));
+    return buscador
+}
 
-// export const filtraBuscador = (name, arrPokemon) => {
-//     // debugger;
-//     const buscador = arrPokemon.filter((pokemon) => {
-//         buscador.includes(name)
-
-
-// })};
-
-
-
-
-
-
-
-
-
-
-
+export const reduceType = (arrPokemon) => {
+const tiposFlat = arrPokemon.map((pokemon) => pokemon.type).flat()
+const contarTipos = tiposFlat.reduce(function(obj, tipos){
+    if (!obj[tipos]){
+        obj[tipos]=1;
+    } else {
+        obj[tipos]++
+    }
+    return obj;
+}, {});
+// console.log(contarTipos)
+return contarTipos
+}
 
