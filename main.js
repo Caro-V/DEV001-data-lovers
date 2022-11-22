@@ -5,6 +5,8 @@ import { filtraTipos, ordenarAZ, ordenarZA, filtraBuscador, reduceType } from '.
 const cadaPokemon = data.pokemon
 const contenedor = document.getElementById("cardList")
 const divParaModal = document.getElementById("divParaModal")
+
+//Creamos modal para cada Pokemon
 const crearModal = (pokemon) => {
     const modal = document.createElement("div");
     modal.className = "modal-container"
@@ -12,6 +14,7 @@ const crearModal = (pokemon) => {
     modal.innerHTML =
 
         `  <div class= "modal">
+            <div><button id="closeModal" class="close">X</button></div>
             <p class="name-modal">${pokemon.name}</p>
             <p class="img"><img src="${pokemon.img}"></p>
             <p class="text-modal">${pokemon.about}</p><br>
@@ -23,14 +26,15 @@ const crearModal = (pokemon) => {
             <div class="text-modal"> <span class="name-card">Weaknesses</span><br> ${pokemon["weaknesses"].map((debilidad) =>
                 `<li class="ataqueClass ${debilidad}">${debilidad}</li>`).join("")}</div> 
             <div class="text-modal"> <span class="name-card">Resistant</span><br> ${pokemon["resistant"].map((resistencia) =>
-                    `<li class="ataqueClass ${resistencia}">${resistencia}</li>`).join("")}</div>  
+                `<li class="ataqueClass ${resistencia}">${resistencia}</li>`).join("")}</div> 
             </div>
-            <button id="closeModal" class="close">X</button>
+            
         </div>`
     divParaModal.innerHTML = '';
     divParaModal.appendChild(modal)
 }
 
+//Generamos tarjetas para cada Pokemon
 const tarjetasPokemon = (arrPoke) => {
     contenedor.innerHTML = '';
     arrPoke.forEach((pokemon, index) => {
@@ -53,7 +57,7 @@ const tarjetasPokemon = (arrPoke) => {
         const open = document.querySelectorAll(".open")
 
 
-
+//Función para que al abrir el modal se muestre el pokemon que corresponde
         open.forEach(btn => {
             btn.addEventListener("click", function eventoModal(e) {
                 const pokeIndex = parseInt(e.target.id)
@@ -73,10 +77,9 @@ const tarjetasPokemon = (arrPoke) => {
 (tarjetasPokemon(cadaPokemon))
 
 
-
+//Función que muestra el array por tipos según lo seleccionado por el usuario
 const listaTipos = document.querySelectorAll('.menuDesplegable button')
 listaTipos.forEach((button) => {
-
     button.addEventListener("click", function eventos(e) {
         contenedor.setAttribute("filter", e.target.value)
         const resultado = filtraTipos(e.target.value, cadaPokemon)
@@ -84,6 +87,7 @@ listaTipos.forEach((button) => {
     });
 });
 
+//Función que ordene de la A a la Z
 const buttonOrdenarAZ = document.getElementById('buttonOrdenarAZ')
 buttonOrdenarAZ.addEventListener("click", function () {
     if (contenedor.getAttribute("filter") == "none") {
@@ -96,6 +100,7 @@ buttonOrdenarAZ.addEventListener("click", function () {
     }
 });
 
+//Función que ordena de la Z a la A
 const buttonOrdenarZA = document.getElementById('buttonOrdenarZA')
 buttonOrdenarZA.addEventListener("click", function () {
     if (contenedor.getAttribute("filter") == "none") {
@@ -108,7 +113,15 @@ buttonOrdenarZA.addEventListener("click", function () {
     }
 });
 
+//Función que muestra el pokemon según el input del buscador
+const inputBuscar = document.getElementById("inputBuscar")
+inputBuscar.addEventListener("keyup", () => {
+    const search = filtraBuscador(inputBuscar.value, cadaPokemon);
+    // console.log(search);
+    tarjetasPokemon(search)
+})
 
+//Creamos el modal para estadística
 const btnEstadistica = document.getElementById("btnEstadistica")
 const divOpaco = document.getElementById("divOpaco")
 const closeEstadistica = document.getElementById("closeEstadistica")
@@ -119,13 +132,8 @@ closeEstadistica.addEventListener("click", () => {
     divOpaco.classList.remove("show");
 })
 
-const inputBuscar = document.getElementById("inputBuscar")
-inputBuscar.addEventListener("keyup", () => {
-    const search = filtraBuscador(inputBuscar.value, cadaPokemon);
-    // console.log(search);
-    tarjetasPokemon(search)
-})
 
+//Se muestra el resultado de la estadística por tipos
 document.getElementById("conteoTipos").innerHTML =
     `<p class="statTitle">Number of Pokémon per type</p>
     <div class="modalInfoEstats name-card">
