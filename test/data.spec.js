@@ -206,7 +206,7 @@ let arrayOrdenarZA = [
   },
 
 ];
-// PRUEBA PARA FILTRADO TIPOS ....
+// PRUEBA PARA BUSCADOR ....
 let arrayBuscador =[
     {
       "num": "175",
@@ -271,7 +271,7 @@ describe('filtraBuscador', () => {
     expect(typeof filtraBuscador).toBe('function');
   });
   it('Debería retornar "togepi" para "togepi"', () => {
-  expect(filtraBuscador('togepi', arrayBuscador)).toEqual(arrayBuscador);
+  expect(filtraBuscador('togepi', arrayParaTest)).toEqual(arrayBuscador);
   });
 })
 
