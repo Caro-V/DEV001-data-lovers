@@ -20,7 +20,7 @@ const crearModal = (pokemon) => {
             <p class="text-modal">${pokemon.about}</p><br>
             <div class= "modalInfo">
             <p class="text-modal"> <span class="name-card">Height</span><br> ${pokemon["size"].height}</p>
-            <p class="text-modal"> <span class="name-card"> Weight</span><br> ${pokemon["size"].height}</p>
+            <p class="text-modal"> <span class="name-card"> Weight</span><br> ${pokemon["size"].weight}</p>
             <div class="text-modal"> <span class="name-card">Attack</span><br> ${pokemon["special-attack"].map((ataque) =>
             `<li class="ataqueClass ${ataque}">${ataque.name}</li>`).join("")}</div>
             <div class="text-modal"> <span class="name-card">Weaknesses</span><br> ${pokemon["weaknesses"].map((debilidad) =>
@@ -42,7 +42,7 @@ const tarjetasPokemon = (arrPoke) => {
         const tarjeta = document.createElement("div");
         tarjeta.className = "card"
         tarjeta.innerHTML =
-            `<div class= "front">
+        `<div class= "front">
             <p class="name">${pokemon.name}</p>
             <p class="img" ><img src="${pokemon.img}"></p>
             <p class="pk_num">${pokemon.num}</p>
